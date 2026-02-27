@@ -6,6 +6,14 @@
     <description>Recent content in Blog on daniel // seclog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
+    <lastBuildDate>Fri, 27 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enumeration Is Iterative</title>
+      <link>http://localhost:1313/posts/enumeration-is-iterative/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/enumeration-is-iterative/</guid>
+      <description>&lt;h1 id=&#34;enumeration-is-iterative&#34;&gt;Enumeration Is Iterative&lt;/h1&gt;&#xA;&lt;p&gt;When I first started studying penetration testing, I thought enumeration was basically:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;run nmap -&amp;gt; read output -&amp;gt; exploit something&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I found out quickly that this mindset is broken from the get go, since enumeration isn&amp;rsquo;t a single scan, it&amp;rsquo;s a loop.&lt;/p&gt;&#xA;&lt;h2 id=&#34;my-initial-mistake&#34;&gt;My Initial Mistake&lt;/h2&gt;&#xA;&lt;p&gt;My early workflow looked something like this:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap -sC -sV -p- &amp;lt;target-ip&amp;gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I would just look at the open ports, identify the service and immediatly google an exploit.&#xA;Something I&amp;rsquo;ve heard that happens to many aspiring PT&amp;rsquo;s early on, but the problem is that real systems don&amp;rsquo;t just reveal everything in one pass.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

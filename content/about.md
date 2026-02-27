@@ -1,10 +1,8 @@
 +++
 date = '2026-02-27T15:18:41+02:00'
 draft = false
-title = 'about'
+title = 'whoami'
 +++
-
-# whoami
 
 My name is Daniel Huri, I'm an offensive security nerd mostly but I also write and draw comics on my spare time [right here](https://www.instagram.com/_dannyh).
 

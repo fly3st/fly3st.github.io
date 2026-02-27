@@ -1,5 +1,5 @@
 +++
-date = '2026-02-27T16:04:08+02:00'
+date = '2026-02-27'
 draft = false 
 title = 'Enumeration Is Iterative'
 tags = ["enumeration", "nmap", "cpts"]
@@ -23,8 +23,13 @@ My early workflow looked something like this:
 nmap -sC -sV -p- <target-ip>
 ```
 
-I would just look at the open ports, identify the service and immediatly google an exploit, which I've heard is something that happen to many aspiring PT's early on.
-The problem is that real systems don't just reveal everything in one pass.
+I would just look at the open ports, identify the service and immediatly google an exploit.
+Something I've heard that happens to many aspiring PT's early on, but the problem is that real systems don't just reveal everything in one pass.
+
+There's this certain rush to get to an exploit as quickly as possible, because when first starting out, that's the initial goal in mind. The entire premise of a penetration test to a lot of beginners boils down to what you'd do on a CTF competition or HTB / THM rooms which is something I find holds people back trying to understand exactly how things work in a real-world scenario.
+
+It's less about an epic exploit and more about sifting through information to form an idea of what exactly we're dealing with.
+
 
 ## What Enumeration Actually Is
 
@@ -34,19 +39,20 @@ Enumeration is more like:
 extract infromation -> form a hypothesis -> test it -> extract even more information -> repeat
 ```
 
-Every single piece of data changes the entire attack surface.
+Every single piece of data changes the entire attack surface. 
+
 An example of this would be:
 
 * Port 80 open
 * Apache running
-* Visiting site reveals login pannel
+* Visiting site reveals login panel
 * Dirbusting reveals `/admin`
 * `/admin` returns a 403
 * That suggests access control
 * That suggests authentication logic
 * That suggests potential weak creds or logic flaws
 
-Each step creates th next question.
+Each step creates the next question.
 
 ## Iteration in Practice
 
@@ -67,4 +73,4 @@ The more I treat it as a feedback loop the more I progress.
 ## Final Thought
 
 Enumeration is about going as much in-depth as we need to understand how the system works and model an attack surface.
-Creating depth only happens we allow ourselves to understand that we don't know enough, so we let every answer create a new question.
+Creating depth only happens when we allow ourselves to understand that we don't know enough yet, so we let every answer create a new question.

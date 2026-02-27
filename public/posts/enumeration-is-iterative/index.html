@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Enumeration Is Iterative</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Enumeration Is Iterative When I first started studying penetration testing, I thought enumeration was basically:
+run nmap -&gt; read output -&gt; exploit something I found out quickly that this mindset is broken from the get go, since enumeration isn&rsquo;t a single scan, it&rsquo;s a loop.
+My Initial Mistake My early workflow looked something like this:
+nmap -sC -sV -p- &lt;target-ip&gt; I would just look at the open ports, identify the service and immediatly google an exploit. Something I&rsquo;ve heard that happens to many aspiring PT&rsquo;s early on, but the problem is that real systems don&rsquo;t just reveal everything in one pass.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/enumeration-is-iterative/" />
+
+
+  
+  
+    
+      <link rel="stylesheet" href="/css/main.css">
+    
+  
+
+
+<link rel="shortcut icon" href="/favicon.svg" >
+
+<meta name="twitter:card" content="summary" />
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Enumeration Is Iterative">
+<meta property="og:description" content="Enumeration Is Iterative When I first started studying penetration testing, I thought enumeration was basically:
+run nmap -&gt; read output -&gt; exploit something I found out quickly that this mindset is broken from the get go, since enumeration isn&rsquo;t a single scan, it&rsquo;s a loop.
+My Initial Mistake My early workflow looked something like this:
+nmap -sC -sV -p- &lt;target-ip&gt; I would just look at the open ports, identify the service and immediatly google an exploit. Something I&rsquo;ve heard that happens to many aspiring PT&rsquo;s early on, but the problem is that real systems don&rsquo;t just reveal everything in one pass.
+" />
+<meta property="og:url" content="http://localhost:1313/posts/enumeration-is-iterative/" />
+<meta property="og:site_name" content="daniel // seclog" />
+
+
+
+
+  <meta property="article:published_time" content="2026-02-27 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+<main>
+  
+<article>
+  <nav aria-label="All posts">
+    <a href="/posts">&larr; Back to All Posts</a>
+  </nav>
+  <header>
+    <h1>Enumeration Is Iterative</h1>
+    <time datetime="2026-02-27">February 27, 2026</time>
+    
+     <nav>
+          <ul>
+          
+          <li>
+            <a href="http://localhost:1313/tags/enumeration/" class="button">enumeration</a>
+          </li>
+          
+          <li>
+            <a href="http://localhost:1313/tags/nmap/" class="button">nmap</a>
+          </li>
+          
+          <li>
+            <a href="http://localhost:1313/tags/cpts/" class="button">cpts</a>
+          </li>
+          
+          </ul>
+     </nav>
+    
+  </header><h1 id="enumeration-is-iterative">Enumeration Is Iterative</h1>
+<p>When I first started studying penetration testing, I thought enumeration was basically:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>run nmap -&gt; read output -&gt; exploit something
+</span></span></code></pre></div><p>I found out quickly that this mindset is broken from the get go, since enumeration isn&rsquo;t a single scan, it&rsquo;s a loop.</p>
+<h2 id="my-initial-mistake">My Initial Mistake</h2>
+<p>My early workflow looked something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sC -sV -p- &lt;target-ip&gt;
+</span></span></code></pre></div><p>I would just look at the open ports, identify the service and immediatly google an exploit.
+Something I&rsquo;ve heard that happens to many aspiring PT&rsquo;s early on, but the problem is that real systems don&rsquo;t just reveal everything in one pass.</p>
+<p>There&rsquo;s this certain rush to get to an exploit as quickly as possible, because when first starting out, that&rsquo;s the initial goal in mind. The entire premise of a penetration test to a lot of beginners boils down to what you&rsquo;d do on a CTF competition or HTB / THM rooms which is something I find holds people back trying to understand exactly how things work in a real-world scenario.</p>
+<p>It&rsquo;s less about an epic exploit and more about sifting through information to form an idea of what exactly we&rsquo;re dealing with.</p>
+<h2 id="what-enumeration-actually-is">What Enumeration Actually Is</h2>
+<p>Enumeration is more like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>extract infromation -&gt; form a hypothesis -&gt; test it -&gt; extract even more information -&gt; repeat
+</span></span></code></pre></div><p>Every single piece of data changes the entire attack surface.</p>
+<p>An example of this would be:</p>
+<ul>
+<li>Port 80 open</li>
+<li>Apache running</li>
+<li>Visiting site reveals login panel</li>
+<li>Dirbusting reveals <code>/admin</code></li>
+<li><code>/admin</code> returns a 403</li>
+<li>That suggests access control</li>
+<li>That suggests authentication logic</li>
+<li>That suggests potential weak creds or logic flaws</li>
+</ul>
+<p>Each step creates the next question.</p>
+<h2 id="iteration-in-practice">Iteration in Practice</h2>
+<p>A real session looks more like this:</p>
+<ol>
+<li>Run a broad scan</li>
+<li>Notice SMB open</li>
+<li>Enumerate SMB shares</li>
+<li>Find readable share</li>
+<li>Extract files</li>
+<li>Discover internal hostnames</li>
+<li>Re-run scan against internal references</li>
+</ol>
+<p>Information feeds the next action, it isn&rsquo;t about finding a vulnerability it&rsquo;s more about building an understanding of the system we&rsquo;re trying to exploit.
+That shift forced my thinking into reading banners more carefully and inspecting responses, HTTP headers and error messages.
+The more I treat it as a feedback loop the more I progress.</p>
+<h2 id="final-thought">Final Thought</h2>
+<p>Enumeration is about going as much in-depth as we need to understand how the system works and model an attack surface.
+Creating depth only happens when we allow ourselves to understand that we don&rsquo;t know enough yet, so we let every answer create a new question.</p>
+
+</article>
+
+</main>
+<footer class="footer">
+    <p>
+        Built with
+        <a href="https://gohugo.io" class="footerLink">Hugo</a> and
+        <a href="https://github.com/akopdev/hugo-theme-chicago7" class="footerLink">Chicago7</a> theme
+    </p>
+    
+    
+    <p>
+        &copy; 2026  
+    </p>
+</footer>
+
+</body>
+</html>
