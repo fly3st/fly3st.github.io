@@ -1,0 +1,7 @@
+baseURL = "https://fly3st.github.io/"
+languageCode = "en-us"
+title = "daniel // seclog"
+
+[module]
+  [[module.imports]]
+    path = "github.com/akopdev/hugo-theme-chicago7"
