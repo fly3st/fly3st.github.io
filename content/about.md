@@ -11,4 +11,3 @@ My name is Daniel Huri, I'm an offensive security nerd mostly but I also write a
 I'm currently studying the fundementals of IT and offensive security and actively documenting my experience and methodology.
 I enjoy fiddeling with new tech whether it's a new framework or even simple hardware projects, if you'd like to see what I'm up to, check out my blog section.
 
-Feel free to [contact]() me.

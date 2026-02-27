@@ -2,6 +2,8 @@
 title: "daniel // seclog"
 ---
 
-Minimal logbook of everything I'm doing in offensive cybersecurity.
+Minimal public log of my cybersecurity training.
 
-Start here: [blog](/posts/)
+- [Blog](/posts/)
+- [About](/about/)
+- [Contact](/contact/)
