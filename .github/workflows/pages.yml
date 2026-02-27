@@ -32,26 +32,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
-          # Fetch the latest linux-x64 tarball URL from GitHub API
-          URL="$(curl -fsSL https://api.github.com/repos/sass/dart-sass/releases/latest \
-            | grep -Eo 'https://[^"]+dart-sass-linux-x64\.tar\.gz' \
-            | head -n 1)"
-
-          echo "Downloading: $URL"
-
-          curl -fL --retry 5 --retry-delay 2 -o dart-sass.tar.gz "$URL"
-
-          # sanity check: must be a gzip file
-          file dart-sass.tar.gz
-          file dart-sass.tar.gz | grep -qi 'gzip compressed' || (echo "Not a gzip file"; head -c 200 dart-sass.tar.gz; exit 1)
+          curl -fL --retry 5 --retry-delay 2 \
+            -o dart-sass.tar.gz \
+            https://github.com/sass/dart-sass/releases/download/1.97.3/dart-sass-1.97.3-linux-x64.tar.gz
 
           tar -xzf dart-sass.tar.gz
-
           sudo rm -rf /opt/dart-sass
           sudo mv dart-sass /opt/dart-sass
           sudo ln -sf /opt/dart-sass/sass /usr/local/bin/sass
-
           sass --version
 
       - name: Build
